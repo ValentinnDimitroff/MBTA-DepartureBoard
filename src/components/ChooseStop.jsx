@@ -6,24 +6,24 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import { resources } from '../constants'
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
+        margin: theme.spacing(1),
+        minWidth: 120,
     },
     selectEmpty: {
-      marginTop: theme.spacing(2),
+        marginTop: theme.spacing(2),
     },
-  }));
+}));
 
 const ChooseStop = () => {
-    // TODO - parse fields from options
     const classes = useStyles()
     const [value, setValue] = useState()
 
-    const { data, loading, loaded, errors } = useGetAll(apiRoutes.stops, "/?fields[stop]=name&page[limit]=10") //filter[name]=Forest&
-    console.log("response", data);
+    const { data, loading, loaded, errors } = useGetAll(resources.stops, { fields: ["name"], perPage: 10 })
+    console.log("response", data, errors);
 
     const handleChange = (event) => {
         setValue(event.target.value);

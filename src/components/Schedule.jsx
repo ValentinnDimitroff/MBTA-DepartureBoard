@@ -8,7 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { apiRoutes, useGetAll } from '../api'
+import { useGetAll } from '../api'
+import { resources } from '../constants'
 
 const useStyles = makeStyles({
     table: {
@@ -73,8 +74,8 @@ const Schedule = props => {
         fields: ["arrival_time", "departure_time"]
     }
 
-    const { data, loading, loaded, error } = useGetAll(apiRoutes.schedules, "/?filter[stop]=9221&include=route",)
-
+    const { data, loading, loaded, error } = useGetAll(resources.schedules, { filter: { stop: "9221" }, include: ["route"] })
+    //"/?filter[stop]=9221&include=route",
     console.log("loggog", data);
     // TODO refresh button
 
