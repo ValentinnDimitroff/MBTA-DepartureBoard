@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ChooseStop from './ChooseStop'
+import Schedule from './Schedule'
 
 const DeparturesBoard = props => {
     return (
         <div>
+            <input type="date" />
             <ChooseStop />
-            <div>List departures by stop</div>
+            <Schedule />
         </div>
     )
 }

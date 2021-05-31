@@ -6,6 +6,7 @@ export const createGetByIdRoute = (id, resourceName) => `${API_BASE}/${resourceN
 
 const apiRoutes = {
     stops: "stops",
+    schedules: "schedules",
 }
 
 export default apiRoutes;
