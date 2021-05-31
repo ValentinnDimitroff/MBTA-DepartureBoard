@@ -1,9 +1,8 @@
-import { createGetAllRoute } from "../api.routes"
+import apiRoutes from "../api.routes"
 import useFetch from "./useFetch"
 
-export const useGetAll = (resource, filter) => {
-    const url = createGetAllRoute(resource)
-    const result = useFetch(`${url}${filter}`, {})
+export const useGetAll = (resource, options) => {
+    const result = useFetch(apiRoutes[resource], options)
 
     return result
 }
