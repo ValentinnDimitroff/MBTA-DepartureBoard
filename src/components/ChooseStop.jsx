@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
 import { apiRoutes, useGetAll } from '../api'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import { resources } from '../constants'
+import { departuresBoardActions, departuresBoardStopIdSelector } from '../redux/departures-board'
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -20,13 +22,19 @@ const useStyles = makeStyles((theme) => ({
 
 const ChooseStop = () => {
     const classes = useStyles()
-    const [value, setValue] = useState()
+    const dispatch = useDispatch()
+    const value = useSelector(departuresBoardStopIdSelector)
 
-    const { data, loading, loaded, errors } = useGetAll(resources.stops, { fields: ["name"], perPage: 10 })
-    console.log("response", data, errors);
+    const { data, loading, loaded, errors } = useGetAll(
+        resources.stops,
+        {
+            fields: ["name"],
+            perPage: 10
+        }
+    )
 
     const handleChange = (event) => {
-        setValue(event.target.value);
+        dispatch(departuresBoardActions.changeStop(event.target.value))
     };
 
     return (

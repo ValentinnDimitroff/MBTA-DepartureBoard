@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,14 +9,15 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useGetAll } from '../api'
-import { resources } from '../constants'
+import { departuresBoardScheduleSelector } from '../redux/departures-board';
 
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
-        maxWidth: 1000
     },
+    container: {
+        maxWidth: 1000
+    }
 });
 
 const useRowStyles = makeStyles(theme => ({
@@ -66,21 +68,22 @@ const ScheduleRow = ({ record }) => {
 }
 
 const Schedule = props => {
-    const classes = useStyles();
-    const options = {
-        filter: { stop: 9221 },
+    const classes = useStyles()
+    const dataArr = useSelector(departuresBoardScheduleSelector)
 
+    // const { data, loading, loaded, error } = useGetAll(
+    //     resources.schedules,
+    //     {
+    //         filter: { stop: "9221" },
+    //         include: ["route"],
+    //         fields: ["direction_id", "departure_time"]
+    //     }
+    // )
 
-        fields: ["arrival_time", "departure_time"]
-    }
-
-    const { data, loading, loaded, error } = useGetAll(resources.schedules, { filter: { stop: "9221" }, include: ["route"] })
-    //"/?filter[stop]=9221&include=route",
-    console.log("loggog", data);
     // TODO refresh button
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className={classes.container}>
             <Table className={classes.table} size="small" aria-label="schedule-table">
                 <TableHead>
                     <TableRow>
@@ -93,7 +96,7 @@ const Schedule = props => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data && data.map(x => <ScheduleRow key={x.id} record={x} />)}
+                    {dataArr && dataArr.length > 0 && dataArr.map(x => <ScheduleRow key={x.id} record={x} />)}
                 </TableBody>
             </Table>
         </TableContainer>
