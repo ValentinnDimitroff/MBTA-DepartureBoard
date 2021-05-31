@@ -1,22 +1,9 @@
 import React from 'react'
-
-const attachIncluded = (data, included = []) => {
-    console.log('attach', { data, included });
-
-    included.forEach((entity) => {
-        data.forEach(x => {
-            if (x.relationships[entity.type] !== undefined) {
-                x.relationships[entity.type] = entity
-            }
-        })
-    })
-
-    return data
-}
+import httpClient from '../httpClient';
 
 const useFetch = (url, options) => {
     const [data, setData] = React.useState(null);
-    const [error, setError] = React.useState(null);
+    const [errors, setErrors] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
     const [loaded, setLoaded] = React.useState(false);
 
@@ -24,27 +11,26 @@ const useFetch = (url, options) => {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const res = await fetch(url, options)
-                const { data, included, errors } = await res.json()
+                const { data, errors } = await httpClient.request(url, options)
+
                 if (data) {
-                    const dataIncluded = attachIncluded(data, included)
-                    setData(dataIncluded)
+                    setData(data)
                     setLoading(false)
                     setLoaded(true)
                 }
 
                 if (errors) {
-                    setError(errors)
+                    setErrors(errors)
                 }
             } catch (error) {
-                setError(error)
+                setErrors(error)
             }
         }
 
         fetchData()
     }, [])
 
-    return { data, error, loading, loaded }
+    return { data, errors, loading, loaded }
 };
 
 export default useFetch;

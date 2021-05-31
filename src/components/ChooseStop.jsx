@@ -22,7 +22,7 @@ const ChooseStop = () => {
     const classes = useStyles()
     const [value, setValue] = useState()
 
-    const { data, loading, loaded, error } = useGetAll(apiRoutes.stops, "/?fields[stop]=name&page[limit]=10") //filter[name]=Forest&
+    const { data, loading, loaded, errors } = useGetAll(apiRoutes.stops, "/?fields[stop]=name&page[limit]=10") //filter[name]=Forest&
     console.log("response", data);
 
     const handleChange = (event) => {
@@ -32,7 +32,7 @@ const ChooseStop = () => {
     return (
         <>
             {loading && <div>Loading</div>}
-            {error && <div>{error.map(({ status, title, source, detail }) => (
+            {errors && <div>{errors.map(({ status, title, source, detail }) => (
                 `${status} -> ${title || detail} -> param: ${source.parameter}`)
             )}</div>}
 
