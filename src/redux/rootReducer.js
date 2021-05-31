@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import departuresBoardReducer from './departures-board'
+import departuresBoard from './departures-board'
 
 export default combineReducers({
-    departuresBoard: departuresBoardReducer,
+    departuresBoard: departuresBoard.reducer,
 })
