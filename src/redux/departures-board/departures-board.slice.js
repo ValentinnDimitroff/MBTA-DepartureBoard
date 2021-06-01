@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { calcMetricAverage, commonMetricReducer } from '../_utils'
 
 const name = 'departures-board'
 

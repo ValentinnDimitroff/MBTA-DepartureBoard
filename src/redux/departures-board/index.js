@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import sagas from './departures-board.sagas'
 import slice from './departures-board.slice'
 

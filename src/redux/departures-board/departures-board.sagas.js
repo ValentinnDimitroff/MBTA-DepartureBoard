@@ -1,6 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { departuresBoardActions } from '.'
+import slice from './departures-board.slice'
 import { apiRoutes, httpClient } from '../../api'
+
+const departuresBoardActions = slice.actions
 
 function* fetchStopSchedule({ payload: stopId }) {
     const { data } = yield call(httpClient.request, apiRoutes.schedules, {

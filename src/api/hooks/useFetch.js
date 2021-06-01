@@ -11,16 +11,16 @@ const useFetch = (url, options) => {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const { data, errors } = await httpClient.request(url, options)
+                const { data: resData, errors: resErrors } = await httpClient.request(url, options)
 
-                if (data) {
-                    setData(data)
+                if (resData) {
+                    setData(resData)
                     setLoading(false)
                     setLoaded(true)
                 }
 
-                if (errors) {
-                    setErrors(errors)
+                if (resErrors) {
+                    setErrors(resErrors)
                 }
             } catch (error) {
                 setErrors(error)
