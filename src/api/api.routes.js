@@ -1,5 +1,4 @@
-// Extract to env file
-const API_BASE = 'https://api-v3.mbta.com'
+const API_BASE = process.env.REACT_APP_API_PREFIX
 
 const apiRoutes = {
     stops: `${API_BASE}/stops`,
