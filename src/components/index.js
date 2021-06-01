@@ -1,1 +1,1 @@
-export { default as DeparturesBoard } from './DeparturesBoard'
+export * from './departures-board'

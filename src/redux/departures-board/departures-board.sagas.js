@@ -6,7 +6,10 @@ const departuresBoardActions = slice.actions
 
 function* fetchStopSchedule({ payload: stopId }) {
     const { data } = yield call(httpClient.request, apiRoutes.schedules, {
-        filter: { stop: stopId },
+        filter: {
+            stop: stopId,
+            date: new Date().toLocaleString(),
+        },
         include: ['route'],
         fields: ['direction_id', 'departure_time'],
     })

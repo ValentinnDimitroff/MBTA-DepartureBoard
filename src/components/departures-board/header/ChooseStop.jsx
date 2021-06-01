@@ -5,14 +5,14 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import { useGetAll } from '../api'
-import { resources } from '../constants'
-import { departuresBoardActions, departuresBoardStopIdSelector } from '../redux/departures-board'
+import { useGetAll } from '../../../api'
+import { resources } from '../../../constants'
+import { departuresBoardActions, departuresBoardStopIdSelector } from '../../../redux/departures-board'
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
+        minWidth: 320,
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
@@ -36,7 +36,7 @@ const ChooseStop = () => {
     )
 
     return (
-        <>
+        <div>
             {loading && <div>Loading</div>}
             {errors && (
                 <div>
@@ -59,7 +59,7 @@ const ChooseStop = () => {
                         && data.map((x) => <MenuItem value={x.id}>{`${x.attributes.name}`}</MenuItem>)}
                 </Select>
             </FormControl>
-        </>
+        </div>
     )
 }
 
