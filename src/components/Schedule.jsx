@@ -1,73 +1,65 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { departuresBoardScheduleSelector } from '../redux/departures-board';
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import { departuresBoardScheduleSelector } from '../redux/departures-board'
 
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
-});
+})
 
-const useRowStyles = makeStyles(theme => ({
+const useRowStyles = makeStyles((theme) => ({
     dot: {
-        backgroundColor: props => `#${props.color}`,
+        backgroundColor: (props) => `#${props.color}`,
         width: '10px',
         height: '10px',
         borderRadius: '50%',
         display: 'inline-block',
-        marginRight: theme.spacing(1)
-    }
+        marginRight: theme.spacing(1),
+    },
 }))
 
-const ScheduleRow = React.memo(
-    ({ record }) => {
-        const {
-            attributes: {
-                departure_time,
-                direction_id
+const ScheduleRow = React.memo(({ record }) => {
+    const {
+        attributes: { departure_time, direction_id },
+        relationships: {
+            route: {
+                attributes: { color, description, fare_class, direction_destinations },
             },
-            relationships: {
-                route: {
-                    attributes: {
-                        color,
-                        description,
-                        fare_class,
-                        direction_destinations
-                    }
-                }
-            }
-        } = record
+        },
+    } = record
 
-        const classes = useRowStyles({ color })
+    const classes = useRowStyles({ color })
 
-        return (
-            <TableRow>
-                <TableCell component="th" scope="row">
-                    <span className={classes.dot}></span>
-                    {description}
-                </TableCell>
-                <TableCell align="right" style={{ width: 160 }}>
-                    {(new Date(departure_time)).toLocaleTimeString("en-US")}
-                </TableCell>
-                <TableCell align="center">{direction_destinations[direction_id]}</TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell component="th" scope="row">{fare_class}</TableCell>
-            </TableRow>
-        )
-    })
+    return (
+        <TableRow>
+            <TableCell component="th" scope="row">
+                <span className={classes.dot}></span>
+                {description}
+            </TableCell>
+            <TableCell align="right" style={{ width: 160 }}>
+                {new Date(departure_time).toLocaleTimeString('en-US')}
+            </TableCell>
+            <TableCell align="center">{direction_destinations[direction_id]}</TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell component="th" scope="row">
+                {fare_class}
+            </TableCell>
+        </TableRow>
+    )
+})
 
-const EmptyResult = withStyles(theme => ({
+const EmptyResult = withStyles((theme) => ({
     root: {
         textAlign: 'center',
         paddingTop: theme.spacing(2),
@@ -110,19 +102,17 @@ const Schedule = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {dataArr
-                        && dataArr.length > 0
-                        ? dataArr.map(x => <ScheduleRow key={x.id} record={x} />)
-                        : <EmptyResult />
-                    }
+                    {dataArr && dataArr.length > 0 ? (
+                        dataArr.map((x) => <ScheduleRow key={x.id} record={x} />)
+                    ) : (
+                        <EmptyResult />
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>
     )
 }
 
-Schedule.propTypes = {
-
-}
+Schedule.propTypes = {}
 
 export default Schedule

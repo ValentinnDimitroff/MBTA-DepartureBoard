@@ -1,11 +1,11 @@
 import React from 'react'
-import httpClient from '../httpClient';
+import httpClient from '../httpClient'
 
 const useFetch = (url, options) => {
-    const [data, setData] = React.useState(null);
-    const [errors, setErrors] = React.useState(null);
-    const [loading, setLoading] = React.useState(false);
-    const [loaded, setLoaded] = React.useState(false);
+    const [data, setData] = React.useState(null)
+    const [errors, setErrors] = React.useState(null)
+    const [loading, setLoading] = React.useState(false)
+    const [loaded, setLoaded] = React.useState(false)
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -31,6 +31,6 @@ const useFetch = (url, options) => {
     }, [])
 
     return { data, errors, loading, loaded }
-};
+}
 
-export default useFetch;
+export default useFetch

@@ -17,13 +17,15 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "prettier": "^2.3.0",
     "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier  --config prettier.config.js --write -c src"
   },
   "eslintConfig": {
     "extends": [

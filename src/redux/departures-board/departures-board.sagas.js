@@ -3,17 +3,13 @@ import { departuresBoardActions } from '.'
 import { apiRoutes, httpClient } from '../../api'
 
 function* fetchStopSchedule({ payload: stopId }) {
-    const { data } = yield call(httpClient.request, apiRoutes.schedules,
-        {
-            filter: { stop: stopId },
-            include: ["route"],
-            fields: ["direction_id", "departure_time"]
-        }
-    )
+    const { data } = yield call(httpClient.request, apiRoutes.schedules, {
+        filter: { stop: stopId },
+        include: ['route'],
+        fields: ['direction_id', 'departure_time'],
+    })
 
-    yield put(
-        departuresBoardActions.setSchedule(data)
-    )
+    yield put(departuresBoardActions.setSchedule(data))
 }
 
 function* changeStopSaga() {

@@ -17,13 +17,13 @@ const bloodGlucoseSlice = createSlice({
         },
         setSchedule(state, { payload }) {
             state.schedule = payload
-        }
-    }
+        },
+    },
 })
 
 const bloodGlucoseSliceApi = {
     name,
-    ...bloodGlucoseSlice
+    ...bloodGlucoseSlice,
 }
 
 export default bloodGlucoseSliceApi

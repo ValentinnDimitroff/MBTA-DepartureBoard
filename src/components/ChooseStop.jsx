@@ -17,33 +17,35 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
-}));
+}))
 
 const ChooseStop = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const value = useSelector(departuresBoardStopIdSelector)
 
-    const { data, loading, loaded, errors } = useGetAll(
-        resources.stops,
-        {
-            filter: { direction_id: 0 },
-            fields: ["name"],
-            perPage: 10
-        }
-    )
+    const { data, loading, loaded, errors } = useGetAll(resources.stops, {
+        filter: { direction_id: 0 },
+        fields: ['name'],
+        perPage: 10,
+    })
 
     const handleChange = useCallback(
         (e) => dispatch(departuresBoardActions.changeStop(e.target.value)),
         [dispatch]
-    );
+    )
 
     return (
         <>
             {loading && <div>Loading</div>}
-            {errors && <div>{errors.map(({ status, title, source, detail }) => (
-                `${status} -> ${title || detail} -> param: ${source.parameter}`)
-            )}</div>}
+            {errors && (
+                <div>
+                    {errors.map(
+                        ({ status, title, source, detail }) =>
+                            `${status} -> ${title || detail} -> param: ${source.parameter}`
+                    )}
+                </div>
+            )}
 
             <FormControl className={classes.formControl}>
                 <InputLabel id="choose-stop-select-label">Choose Stop</InputLabel>
@@ -53,7 +55,9 @@ const ChooseStop = () => {
                     value={value}
                     onChange={handleChange}
                 >
-                    {!loading && loaded && data.map(x => <MenuItem value={x.id}>{`${x.attributes.name}`}</MenuItem>)}
+                    {!loading &&
+                        loaded &&
+                        data.map((x) => <MenuItem value={x.id}>{`${x.attributes.name}`}</MenuItem>)}
                 </Select>
             </FormControl>
         </>

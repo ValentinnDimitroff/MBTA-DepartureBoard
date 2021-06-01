@@ -1,5 +1,4 @@
-
-// Extract to env file 
+// Extract to env file
 const API_BASE = 'https://api-v3.mbta.com'
 
 const apiRoutes = {

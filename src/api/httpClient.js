@@ -6,8 +6,8 @@ const buildUrl = ({ baseUrl, filter, fields = [], include = [], perPage }) => {
     // Filter by fields
     if (filter) {
         Object.keys(filter)
-            .map(key => `filter[${key}]=${filter[key]}`)
-            .forEach(x => queryParamsArr.push(x))
+            .map((key) => `filter[${key}]=${filter[key]}`)
+            .forEach((x) => queryParamsArr.push(x))
     }
 
     // Include related resource's results
@@ -18,7 +18,7 @@ const buildUrl = ({ baseUrl, filter, fields = [], include = [], perPage }) => {
     // Include only set of fields
     if (fields.length > 0) {
         const resourceName = baseUrl.split('/')[3]
-        const resourceSingular = resourceName.substring(0, resourceName.length - 1);
+        const resourceSingular = resourceName.substring(0, resourceName.length - 1)
 
         queryParamsArr.push(`fields[${resourceSingular}]=${fields.join(',')}`)
     }
@@ -33,7 +33,7 @@ const buildUrl = ({ baseUrl, filter, fields = [], include = [], perPage }) => {
 
 const attachIncluded = (data, included = []) => {
     included.forEach((resource) => {
-        data.forEach(x => {
+        data.forEach((x) => {
             if (x.relationships[resource.type] !== undefined) {
                 x.relationships[resource.type] = resource
             }
@@ -53,7 +53,7 @@ const httpClient = {
         const dataIncluded = attachIncluded(data, included)
 
         return { data: dataIncluded, errors }
-    }
+    },
 }
 
 export default httpClient

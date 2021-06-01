@@ -1,4 +1,4 @@
 export const resources = {
-    stops: "stops",
-    schedules: "schedules",
+    stops: 'stops',
+    schedules: 'schedules',
 }
