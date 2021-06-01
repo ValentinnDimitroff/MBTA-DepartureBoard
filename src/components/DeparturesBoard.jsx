@@ -1,20 +1,27 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/core/styles';
 import ChooseStop from './ChooseStop'
 import Schedule from './Schedule'
 
-const DeparturesBoard = props => {
+const useStyles = makeStyles({
+    container: {
+        margin: '0 auto',
+        width: '1000px'
+    }
+});
+
+const DeparturesBoard = () => {
+    const classes = useStyles()
+
     return (
-        <div>
-            <input type="date" />
+        <div className={classes.container}>
+            <span>Today - {(new Date()).toLocaleDateString()}</span>
+            <input type="date" value={(new Date())} />
             <ChooseStop />
+            <span>Current Time - {(new Date().toLocaleTimeString())}</span>
             <Schedule />
         </div>
     )
-}
-
-DeparturesBoard.propTypes = {
-
 }
 
 export default DeparturesBoard

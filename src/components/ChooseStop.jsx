@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { apiRoutes, useGetAll } from '../api'
+import { useGetAll } from '../api'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
@@ -28,14 +27,16 @@ const ChooseStop = () => {
     const { data, loading, loaded, errors } = useGetAll(
         resources.stops,
         {
+            filter: { direction_id: 0 },
             fields: ["name"],
             perPage: 10
         }
     )
 
-    const handleChange = (event) => {
-        dispatch(departuresBoardActions.changeStop(event.target.value))
-    };
+    const handleChange = useCallback(
+        (e) => dispatch(departuresBoardActions.changeStop(e.target.value)),
+        [dispatch]
+    );
 
     return (
         <>
@@ -57,10 +58,6 @@ const ChooseStop = () => {
             </FormControl>
         </>
     )
-}
-
-ChooseStop.propTypes = {
-
 }
 
 export default ChooseStop

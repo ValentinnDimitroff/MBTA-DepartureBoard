@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,9 +15,6 @@ const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
-    container: {
-        maxWidth: 1000
-    }
 });
 
 const useRowStyles = makeStyles(theme => ({
@@ -31,43 +28,60 @@ const useRowStyles = makeStyles(theme => ({
     }
 }))
 
-const ScheduleRow = ({ record }) => {
-    const {
-        attributes: {
-            departure_time,
-            direction_id
-        },
-        relationships: {
-            route: {
-                attributes: {
-                    color,
-                    description,
-                    fare_class,
-                    direction_destinations
+const ScheduleRow = React.memo(
+    ({ record }) => {
+        const {
+            attributes: {
+                departure_time,
+                direction_id
+            },
+            relationships: {
+                route: {
+                    attributes: {
+                        color,
+                        description,
+                        fare_class,
+                        direction_destinations
+                    }
                 }
             }
-        }
-    } = record
+        } = record
 
-    const classes = useRowStyles({ color })
+        const classes = useRowStyles({ color })
 
-    return (
-        <TableRow>
-            <TableCell component="th" scope="row">
-                <span className={classes.dot}></span>
-                {description}
-            </TableCell>
-            <TableCell align="right">{(new Date(departure_time)).toLocaleTimeString("en-US")}</TableCell>
-            <TableCell align="center">{direction_destinations[direction_id]}</TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell component="th" scope="row">{fare_class}</TableCell>
-        </TableRow>
-    )
-}
+        return (
+            <TableRow>
+                <TableCell component="th" scope="row">
+                    <span className={classes.dot}></span>
+                    {description}
+                </TableCell>
+                <TableCell align="right" style={{ width: 160 }}>
+                    {(new Date(departure_time)).toLocaleTimeString("en-US")}
+                </TableCell>
+                <TableCell align="center">{direction_destinations[direction_id]}</TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell component="th" scope="row">{fare_class}</TableCell>
+            </TableRow>
+        )
+    })
 
-const Schedule = props => {
+const EmptyResult = withStyles(theme => ({
+    root: {
+        textAlign: 'center',
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
+    },
+}))(({ classes }) => (
+    <TableRow>
+        <TableCell classes={classes} colSpan={6} align="center">
+            No results
+        </TableCell>
+    </TableRow>
+))
+
+const Schedule = () => {
     const classes = useStyles()
     const dataArr = useSelector(departuresBoardScheduleSelector)
 
@@ -83,7 +97,7 @@ const Schedule = props => {
     // TODO refresh button
 
     return (
-        <TableContainer component={Paper} className={classes.container}>
+        <TableContainer component={Paper}>
             <Table className={classes.table} size="small" aria-label="schedule-table">
                 <TableHead>
                     <TableRow>
@@ -96,7 +110,11 @@ const Schedule = props => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {dataArr && dataArr.length > 0 && dataArr.map(x => <ScheduleRow key={x.id} record={x} />)}
+                    {dataArr
+                        && dataArr.length > 0
+                        ? dataArr.map(x => <ScheduleRow key={x.id} record={x} />)
+                        : <EmptyResult />
+                    }
                 </TableBody>
             </Table>
         </TableContainer>
