@@ -15,10 +15,18 @@ const DeparturesBoard = () => {
 
     return (
         <div className={classes.container}>
-            <span>Today - {new Date().toLocaleDateString()}</span>
+            <span>
+                Today -
+                {' '}
+                {new Date().toLocaleDateString()}
+            </span>
             <input type="date" value={new Date()} />
             <ChooseStop />
-            <span>Current Time - {new Date().toLocaleTimeString()}</span>
+            <span>
+                Current Time -
+                {' '}
+                {new Date().toLocaleTimeString()}
+            </span>
             <Schedule />
         </div>
     )

@@ -17,6 +17,7 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "eslint-config-airbnb": "^18.2.1",
     "prettier": "^2.3.0",
     "redux-logger": "^3.0.6"
   },
@@ -25,13 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint",
     "prettier": "prettier  --config prettier.config.js --write -c src"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

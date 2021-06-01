@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { useGetAll } from '../api'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
+import { useGetAll } from '../api'
 import { resources } from '../constants'
 import { departuresBoardActions, departuresBoardStopIdSelector } from '../redux/departures-board'
 
@@ -32,7 +32,7 @@ const ChooseStop = () => {
 
     const handleChange = useCallback(
         (e) => dispatch(departuresBoardActions.changeStop(e.target.value)),
-        [dispatch]
+        [dispatch],
     )
 
     return (
@@ -41,8 +41,7 @@ const ChooseStop = () => {
             {errors && (
                 <div>
                     {errors.map(
-                        ({ status, title, source, detail }) =>
-                            `${status} -> ${title || detail} -> param: ${source.parameter}`
+                        ({ status, title, source, detail }) => `${status} -> ${title || detail} -> param: ${source.parameter}`,
                     )}
                 </div>
             )}
@@ -55,9 +54,9 @@ const ChooseStop = () => {
                     value={value}
                     onChange={handleChange}
                 >
-                    {!loading &&
-                        loaded &&
-                        data.map((x) => <MenuItem value={x.id}>{`${x.attributes.name}`}</MenuItem>)}
+                    {!loading
+                        && loaded
+                        && data.map((x) => <MenuItem value={x.id}>{`${x.attributes.name}`}</MenuItem>)}
                 </Select>
             </FormControl>
         </>

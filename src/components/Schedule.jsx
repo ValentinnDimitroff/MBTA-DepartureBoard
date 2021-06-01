@@ -42,16 +42,16 @@ const ScheduleRow = React.memo(({ record }) => {
     return (
         <TableRow>
             <TableCell component="th" scope="row">
-                <span className={classes.dot}></span>
+                <span className={classes.dot} />
                 {description}
             </TableCell>
             <TableCell align="right" style={{ width: 160 }}>
                 {new Date(departure_time).toLocaleTimeString('en-US')}
             </TableCell>
             <TableCell align="center">{direction_destinations[direction_id]}</TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
+            <TableCell align="right" />
+            <TableCell align="right" />
+            <TableCell align="right" />
             <TableCell component="th" scope="row">
                 {fare_class}
             </TableCell>
