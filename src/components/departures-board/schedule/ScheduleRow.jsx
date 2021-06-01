@@ -35,15 +35,16 @@ const ScheduleRow = React.memo(({ record }) => {
                 {description}
             </TableCell>
             <TableCell align="right" style={{ width: 160 }}>
-                {new Date(departure_time).toLocaleTimeString('en-US')}
+                {departure_time
+                    ? new Date(departure_time).toLocaleTimeString('en-US')
+                    : '--:--:--'}
             </TableCell>
             <TableCell align="center">{direction_destinations[direction_id]}</TableCell>
             <TableCell align="right" />
             <TableCell align="right" />
-            <TableCell align="right" />
-            <TableCell component="th" scope="row">
+            {/* <TableCell component="th" scope="row">
                 {fare_class}
-            </TableCell>
+            </TableCell> */}
         </TableRow>
     )
 })

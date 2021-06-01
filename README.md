@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### useful links
+[image station preview](https://commons.wikimedia.org/wiki/File:North_Station_departure_board,_December_2011.jpg)
+[API Best Practices](https://www.mbta.com/developers/v3-api/best-practices)
+[API key](https://api-v3.mbta.com/portal)
+[API Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Trip)
+[Data visualization](https://www.mbta.com/schedules/subway)
+[Stops route](https://www.mbta.com/stops/subway#subway-tab)

@@ -1,6 +1,6 @@
 const sanitizeOptions = ({ filter, fields, include, perPage, ...restOptions }) => restOptions
 
-const buildUrl = ({ baseUrl, filter, fields = [], include = [], perPage }) => {
+const buildUrl = ({ baseUrl, filter, fields = [], include = [], sort = [], perPage }) => {
     const queryParamsArr = []
 
     // Filter by fields
@@ -13,6 +13,11 @@ const buildUrl = ({ baseUrl, filter, fields = [], include = [], perPage }) => {
     // Include related resource's results
     if (include.length > 0) {
         queryParamsArr.push(`include=${include.join(',')}`)
+    }
+
+    // Include related resource's results
+    if (sort.length > 0) {
+        queryParamsArr.push(`sort=${sort.join(',')}`)
     }
 
     // Include only set of fields

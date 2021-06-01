@@ -22,18 +22,17 @@ const Schedule = () => {
     const classes = useStyles()
     const dataArr = useSelector(departuresBoardScheduleSelector)
 
-    // TODO refresh button
+    // TODO add a refresh button or refresh automatically
 
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} size="small" aria-label="schedule-table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center">Carrier</TableCell>
+                        <TableCell align="center">Type</TableCell>
                         <TableCell align="center">Time</TableCell>
                         <TableCell align="center">Destination</TableCell>
                         <TableCell align="center">Train #</TableCell>
-                        <TableCell align="center">Track</TableCell>
                         <TableCell align="center">Status</TableCell>
                     </TableRow>
                 </TableHead>
